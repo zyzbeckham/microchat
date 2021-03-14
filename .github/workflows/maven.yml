@@ -22,13 +22,17 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Build docker
-      run: docker build -t oauth-server:v1.0.0 .
-    - name: Push docker
-      run: |
-       docker login --username=${{ secrets.ALI_DOCKER_HUB_USN }} --password=${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
-       docker tag oauth-server:v1.0.0 ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0
-       docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0
+    - name: Login to Ali
+      uses: docker/login-action@v1
+      with:
+        registry: ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
+        username: ${{ secrets.ALI_DOCKER_HUB_USN }}
+        password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
+    - name: Build and Push Docker Iamge
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0
     - name: Deploying changes
       uses: appleboy/ssh-action@master
       with:
