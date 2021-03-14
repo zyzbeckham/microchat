@@ -22,3 +22,10 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Build docker
+      run: docker build -t locale:tag
+    - name: Build docker
+      run: ｜
+       docker login -u ${{ secrets.ALI_DOCKER_HUB_USN }} -p ${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
+       docker tag locale ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0
+       docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0
