@@ -7,11 +7,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @ConfigurationProperties(prefix = "micro.chat")
 @EnableConfigurationProperties
 @Data
+@RestController
 public class OauthServerApplication {
 
 	private String name;
@@ -20,9 +23,9 @@ public class OauthServerApplication {
 		SpringApplication.run(OauthServerApplication.class, args);
 	}
 
-	@Bean
-	public ApplicationRunner echo () {
-		return args -> System.out.println(this.getName());
+	@GetMapping("/echo")
+	public String echo () {
+		return this.getName();
 	}
 
 }
