@@ -26,6 +26,7 @@ jobs:
       run: docker build -t oauth-server:v1.0.0 .
     - name: Push docker
       run: |
+       echo ${{ secrets.ALI_DOCKER_HUB_PWD }}
        docker login --username=${{ secrets.ALI_DOCKER_HUB_USN }} --password=${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
        docker tag oauth-server:v1.0.0 ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0
        docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0
