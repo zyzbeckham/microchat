@@ -26,6 +26,6 @@ jobs:
       run: docker build -t oauth-server:v1.0.0 .
     - name: Push docker
       run: |
-       docker login --username=zyzbeckham@gmail.com --password=Flzx3qc! registry.cn-beijing.aliyuncs.com
-       docker tag oauth-server:v1.0.0 registry.cn-beijing.aliyuncs.com/readheart/oauth-server:v1.0.0
-       docker push registry.cn-beijing.aliyuncs.com/readheart/oauth-server:v1.0.0
+       docker login --username=${{ secrets.ALI_DOCKER_HUB_USN }} --password=${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
+       docker tag oauth-server:v1.0.0 ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0
+       docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0
