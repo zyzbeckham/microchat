@@ -52,4 +52,4 @@ jobs:
           docker rmi ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0
           docker login --username=${{ secrets.ALI_DOCKER_HUB_USN }} --password=${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
           docker pull ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0
-          docker run -d -p 8080:8080 ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0 --name=oauth-server
+          docker run --name=oauth-server -d -p 8080:8080 ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/readheart/oauth-server:v1.0.0
