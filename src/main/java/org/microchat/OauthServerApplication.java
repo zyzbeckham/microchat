@@ -8,6 +8,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @SpringBootApplication
 @ConfigurationProperties(prefix = "micro.chat")
 @EnableConfigurationProperties
@@ -15,15 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OauthServerApplication {
 
-	private String name;
-
 	public static void main(String[] args) {
 		SpringApplication.run(OauthServerApplication.class, args);
 	}
 
 	@GetMapping("/echo")
 	public String echo () {
-		return this.getName();
+		return DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss").format(LocalDateTime.now());
 	}
 
 }
