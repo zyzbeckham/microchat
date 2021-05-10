@@ -24,7 +24,7 @@ public class OauthServerApplication {
 
 	@GetMapping("/echo")
 	public String echo () {
-		return DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss").format(LocalDateTime.now());
+		return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
 	}
 
 }
